@@ -1,0 +1,45 @@
+
+version: "3.7"
+
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  # HTTP Proxy for identifying sessions
+  # https://github.com/mu-semtech/mu-identifier
+  identifier:
+    image: semtech/mu-identifier:1.9.1
+    environment:
+      SESSION_COOKIE_SECURE: "on"
+      DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_HEADER: "*"
+    links:
+      - dispatcher:dispatcher
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+
+  # Reverse proxy that configures endpoints
+  # https://github.com/mu-semtech/mu-dispatcher
+  dispatcher:
+    image: semtech/mu-dispatcher:2.0.0
+    volumes:
+      - ./config/dispatcher:/config
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+
+  # Front-end made for BNB
+  # https://github.com/lblod/frontend-burgernabije-besluitendatabank
+  frontend:
+    image: lennybontenakel/frontend-validation:latest
+    links:
+      - identifier
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
