@@ -6,9 +6,8 @@ defmodule Dispatcher do
   ]
 
   @any %{}
-  @json %{ accept: %{ json: true } }
+  # @json %{ accept: %{ json: true } }
   @html %{ accept: %{ html: true } }
-
 
   ###############
   # FRONTEND
