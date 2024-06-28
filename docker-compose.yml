@@ -36,25 +36,23 @@ services:
   # Front-end made for BNB
   # https://github.com/lblod/frontend-burgernabije-besluitendatabank
   frontend:
-    # image: lennybontenakel/frontend-validation:latest
+    # image: lennybontenakel/frontend-validation-tool
+    # image: lblod/frontend-validation-tool:latest
     image: snenenenene/frontend-validation-tool:latest
-    env_file:
-      - path: ./default.env
     links:
       - identifier
-      - cors-container
     restart: always
     logging: *default-logging
     labels:
       - "logging=true"
 
-  # CORS Anywhere service
-  cors-container:
-    image: cors-container
+  cors: 
+    # image: snenenenene/comunica-cors-proxy-service:latest
+    image: cors-proxy-service
     restart: always
-    ports:
-      - "3000:3000"
-
     logging: *default-logging
     labels:
       - "logging=true"
+
+
+

@@ -1,5 +1,6 @@
 defmodule Dispatcher do
   use Matcher
+  require Logger
   define_accept_types [
     html: [ "text/html", "application/xhtml+html" ],
     json: [ "application/json", "application/vnd.api+json", "application/sparql-results+json" ]
@@ -8,6 +9,15 @@ defmodule Dispatcher do
   @any %{}
   # @json %{ accept: %{ json: true } }
   @html %{ accept: %{ html: true } }
+
+  ###############
+  # CORS PROXY
+  ###############
+
+   match "/cors/*path", @any do
+    Logger.info("Forwarding /cors/#{path}")
+    Proxy.forward conn, path, "http://cors/"
+  end
 
   ###############
   # FRONTEND
