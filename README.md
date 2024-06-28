@@ -1,6 +1,7 @@
 # app-validation-tool
 
-This repo contains the server configuration of the validation tool
+This repo contains the server configuration of the validation tool. As this project does not contain a distinct backend.
+The stack simply contains an identifier, dispatcher and frontend service
 
 ## Running the project
 
