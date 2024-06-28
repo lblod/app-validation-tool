@@ -36,7 +36,7 @@ services:
   # Front-end made for BNB
   # https://github.com/lblod/frontend-burgernabije-besluitendatabank
   frontend:
-    image: lennybontenakel/frontend-validation:latest
+    image: lblod/frontend-validation-tool:latest
     links:
       - identifier
     restart: always
