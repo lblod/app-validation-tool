@@ -1,0 +1,4 @@
+services:
+  identifier:
+    ports:
+      - "8000:80"
