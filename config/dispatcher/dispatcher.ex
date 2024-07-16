@@ -10,6 +10,10 @@ defmodule Dispatcher do
   @html %{ accept: %{ html: true } }
 
 
+  match "/communica/*path", @any  do
+    Proxy.forward conn, path, "http://cors/" 
+  end
+
   ###############
   # FRONTEND
   ###############
