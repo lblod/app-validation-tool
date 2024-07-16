@@ -43,3 +43,5 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
+  cors:
+    image: lblod/simple-cors-service
